@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+     <!--   <include file="scripts/001_ddl_create_auto_users_table.sql" relativeToChangelogFile="true"/>
+    <include file="scripts/002_ddl_create_auto_posts_table.sql" relativeToChangelogFile="true"/>
+    <include file="scripts/004_ddl_create_price_history_table.sql" relativeToChangelogFile="true"/>
+    <include file="scripts/005_ddl_create_posts_users_table.sql" relativeToChangelogFile="true"/>
+    <include file="scripts/006_ddl_create_engines_table.sql" relativeToChangelogFile="true"/>
+    <include file="scripts/007_ddl_create_owners_table.sql" relativeToChangelogFile="true"/>
+    <include file="scripts/008_ddl_create_cars_table.sql" relativeToChangelogFile="true"/>
+    <include file="scripts/009_ddl_create_car_owners_table.sql" relativeToChangelogFile="true"/>
+    <include file="scripts/010_ddl_alter_auto_posts_table.sql" relativeToChangelogFile="true"/>
+    <include file="scripts/011_dml_insert_engines.sql" relativeToChangelogFile="true"/>
+    <include file="scripts/012_dml_insert_owners.sql" relativeToChangelogFile="true"/>
+    <include file="scripts/017_ddl_create_files_table.sql" relativeToChangelogFile="true"/>
+    <include file="scripts/019_ddl_create_bodies_table.sql" relativeToChangelogFile="true"/>
+    <include file="scripts/020_ddl_create_car_models_table.sql" relativeToChangelogFile="true"/>
+    <include file="scripts/021_ddl_create_transmissions_table.sql" relativeToChangelogFile="true"/>
+    <include file="scripts/022_ddl_alter_cars_table.sql" relativeToChangelogFile="true"/>
+    <include file="scripts/023_dml_insert_bodies.sql" relativeToChangelogFile="true"/>
+    <include file="scripts/024_dml_insert_car_models.sql" relativeToChangelogFile="true"/>
+    <include file="scripts/025_dml_insert_transmissions.sql" relativeToChangelogFile="true"/>
+
+    <include file="scripts/026_dml_insert_cars.sql" relativeToChangelogFile="true"/>
+
+    <include file="scripts/028_dml_insert_car_owners.sql" relativeToChangelogFile="true"/>
+
+    <include file="scripts/032_ddl_create_timezones_table.sql" relativeToChangelogFile="true"/>
+    <include file="scripts/033_ddl_alter_auto_users_table.sql" relativeToChangelogFile="true"/>
+    <include file="scripts/034_dml_insert_timezones.sql" relativeToChangelogFile="true"/>
+    <include file="scripts/035_dml_insert_auto_users.sql" relativeToChangelogFile="true"/>
+
+    <include file="scripts/036_dml_insert_auto_posts.sql" relativeToChangelogFile="true"/>
+
+    <include file="scripts/037_dml_insert_price_history.sql" relativeToChangelogFile="true"/>
+
+    <include file="scripts/038_dml_insert_files.sql" relativeToChangelogFile="true"/>
+
+        <include file="scripts/039_dml_insert_post_users.sql" relativeToChangelogFile="true"/>
+        -->
+
+</databaseChangeLog>

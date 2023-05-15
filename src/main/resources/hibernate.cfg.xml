@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+        <property name="hibernate.connection.url">jdbc:postgresql://127.0.0.1:5432/accidents</property>
+        <property name="hibernate.connection.username">postgres</property>
+        <property name="hibernate.connection.password">123456789</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+        <property name="hibernate.connection.pool_size">3</property>
+        <property name="hibernate.current_session_context_class">thread</property>
+        <property name="hibernate.show_sql">true</property>
+<!--
+        <property name="hibernate.format_sql">true</property>
+-->
+
+        <property name="hibernate.jdbc.time_zone">UTC</property>
+
+<!--        <mapping class="ru.job4j.cars.model.User"/>
+        <mapping class="ru.job4j.cars.model.PriceHistory"/>
+        <mapping class="ru.job4j.cars.model.Post"/>
+        <mapping class="ru.job4j.cars.model.Car"/>
+        <mapping class="ru.job4j.cars.model.Engine"/>
+        <mapping class="ru.job4j.cars.model.Owner"/>
+        <mapping class="ru.job4j.cars.model.File"/>
+        <mapping class="ru.job4j.cars.model.Body"/>
+        <mapping class="ru.job4j.cars.model.CarModel"/>
+        <mapping class="ru.job4j.cars.model.Transmission"/>
+        <mapping class="ru.job4j.cars.model.TimeZone"/>
+        <mapping class="ru.job4j.cars.model.CarOwner"/>-->
+    </session-factory>
+</hibernate-configuration>
