@@ -24,6 +24,7 @@ public class IndexController {
      */
     @GetMapping("/index")
     public String index(Model model, HttpSession session) {
+        model.addAttribute("user", "Ivan");
         return "index";
     }
 
