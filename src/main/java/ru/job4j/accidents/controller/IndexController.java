@@ -5,6 +5,7 @@ import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import ru.job4j.accidents.service.AccidentService;
 
 import javax.servlet.http.HttpSession;
 
@@ -16,6 +17,8 @@ import javax.servlet.http.HttpSession;
 @AllArgsConstructor
 public class IndexController {
 
+    AccidentService accidentService;
+
     /**
      * Принимает запрос на отображение стартовой страницы
      * @param model модель вида
@@ -25,6 +28,7 @@ public class IndexController {
     @GetMapping("/index")
     public String index(Model model, HttpSession session) {
         model.addAttribute("user", "Ivan");
+        model.addAttribute("accidents", accidentService.findAll());
         return "index";
     }
 

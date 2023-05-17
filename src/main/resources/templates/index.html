@@ -30,6 +30,7 @@
             <div class="navbar-nav" >
                 <a class="nav-item nav-link active" th:href="@{/index}">Все<span class="sr-only">(current)</span></a>
                 <a class="nav-item nav-link" th:text="${user}" href="#"></a>
+
             </div>
         </div>
     </nav>
@@ -38,13 +39,21 @@
             <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Нарушение</th>
-                <th scope="col">Заявитель</th>
-                <th scope="col">Время создания</th>
-                <th scope="col">Статус</th>
+                <th scope="col">Наименование нарушения</th>
+                <th scope="col">Описание нарушения</th>
+                <th scope="col">Адрес нарушения</th>
+                <!-- <th scope="col">Статус</th> -->
             </tr>
             </thead>
             <tbody>
+            <tr th:each="accident: ${accidents}">
+                <td th:text="${accident.id}" />
+                <td th:text="${accident.name}" />
+                <td th:text="${accident.text}" />
+                <td th:text="${accident.address}" />
+
+            </tr>
+
             </tbody>
         </table>
     </div>
