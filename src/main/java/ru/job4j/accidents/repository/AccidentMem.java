@@ -50,4 +50,28 @@ public class AccidentMem {
         store.put(accident.getId(), accident);
         return Optional.of(accident);
     }
+
+    /**
+     * Ищет нарушение по идентификатору
+     * @param id идентификатор
+     * @return объект нарушения обернутый в Optional, или Optional.empty если нарушение не найдено
+     */
+    public Optional<Accident> findById(int id) {
+        Accident accident = store.get(id);
+        return accident == null ? Optional.empty() : Optional.of(accident);
+    }
+
+    /**
+     * Обновляет нарушение
+     * @param accident объект нарушения
+     * @return true если успешно обновилось, false если не обновилось
+     */
+    public boolean update(Accident accident) {
+        Optional<Accident> accidentOptional = findById(accident.getId());
+        if (accidentOptional.isEmpty()) {
+            return false;
+        }
+        return store.put(accident.getId(), accident) != null;
+    }
+
 }

@@ -17,7 +17,7 @@ import javax.servlet.http.HttpSession;
 @AllArgsConstructor
 public class IndexController {
 
-    AccidentService accidentService;
+    private final AccidentService accidentService;
 
     /**
      * Принимает запрос на отображение стартовой страницы

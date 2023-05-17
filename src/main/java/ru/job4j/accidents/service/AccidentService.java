@@ -7,6 +7,7 @@ import ru.job4j.accidents.model.Accident;
 import ru.job4j.accidents.repository.AccidentMem;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Сервис нарушений
@@ -34,5 +35,23 @@ public class AccidentService {
      */
     public boolean create(Accident accident) {
         return repository.add(accident).isPresent();
+    }
+
+    /**
+     * Ищет нарушение по id
+     * @param id идентификатор
+     * @return объект нарушения обернутый в Optional, или Optional.empty если нарушение не найдено
+     */
+    public Optional<Accident> findById(int id) {
+        return repository.findById(id);
+    }
+
+    /**
+     * Обновляет объект нарушения
+     * @param accident объект нарушения
+     * @return true если успешно обновилось, false если не обновилось
+     */
+    public boolean update(Accident accident) {
+        return repository.update(accident);
     }
 }
