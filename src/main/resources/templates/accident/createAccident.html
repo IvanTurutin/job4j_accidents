@@ -28,35 +28,33 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav" >
-                <a class="nav-item nav-link active" th:href="@{/index}">Все<span class="sr-only">(current)</span></a>
-                <a class="nav-item nav-link" th:href="@{/accidents/createAccident}">Добавить нарушение</a>
+                <a class="nav-item nav-link" th:href="@{/index}">Все</a>
+                <a class="nav-item nav-link active" href="#">Добавить нарушение<span class="sr-only">(current)</span></a>
                 <a class="nav-item nav-link" th:text="${user}" href="#"></a>
 
             </div>
         </div>
     </nav>
-    <div class="row">
-        <table class="table">
-            <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Наименование нарушения</th>
-                <th scope="col">Описание нарушения</th>
-                <th scope="col">Адрес нарушения</th>
-                <!-- <th scope="col">Статус</th> -->
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="accident: ${accidents}">
-                <td th:text="${accident.id}" />
-                <td th:text="${accident.name}" />
-                <td th:text="${accident.text}" />
-                <td th:text="${accident.address}" />
-
-            </tr>
-
-            </tbody>
-        </table>
+    <div class="row pt-3">
+        <div class="card" style="width: 100%">
+            <div class="card-header">
+                Новое нарушение
+            </div>
+            <div class="card-body">
+                <form th:action="@{/accidents/saveAccident}" method="POST" th:object="${accident}" enctype="multipart/form-data">
+                    <input type="hidden" name="id" value="0" th:field="*{id}"/>
+                    <div class="form-group">
+                        <label for="name">Наименование нарушения</label>
+                        <input type="text" class="form-control" name="name" id="name" th:field="*{name}">
+                        <label for="text">Описание нарушения</label>
+                        <input type="text" class="form-control" name="text" id="text" th:field="*{text}">
+                        <label for="address">Адрес нарушения</label>
+                        <input type="text" class="form-control" name="address" id="address" th:field="*{address}">
+                    </div>
+                    <button type="submit" class="btn btn-primary mt-3">Сохранить</button>
+                </form>
+            </div>
+        </div>
     </div>
 </div>
 </body>

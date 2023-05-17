@@ -26,4 +26,13 @@ public class AccidentService {
     public List<Accident> findAll() {
         return repository.findAll();
     }
+
+    /**
+     * Добавляет новое нарушение в БД
+     * @param accident объект нарушения
+     * @return true если успешно добавлен, false если не добавлен.
+     */
+    public boolean create(Accident accident) {
+        return repository.add(accident).isPresent();
+    }
 }
