@@ -20,7 +20,6 @@ public class AccidentController {
     private final AccidentService accidentService;
     private static final Logger LOG = LoggerFactory.getLogger(AccidentController.class.getName());
 
-
     @GetMapping("/createAccident")
     public String viewCreateAccident(Model model) {
         model.addAttribute("user", "Ivan");

@@ -16,7 +16,6 @@ import javax.servlet.http.HttpSession;
 @Controller
 @AllArgsConstructor
 public class IndexController {
-
     private final AccidentService accidentService;
 
     /**

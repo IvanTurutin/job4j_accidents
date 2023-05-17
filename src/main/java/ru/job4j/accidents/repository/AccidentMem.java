@@ -23,6 +23,7 @@ public class AccidentMem {
     @GuardedBy("this")
     private final AtomicInteger count = new AtomicInteger(1);
 
+
     public AccidentMem() {
         store.put(count.getAndIncrement(), new Accident(count.get(), "Accident 1", "Text for accident 1", "Address for accident 1"));
         store.put(count.getAndIncrement(), new Accident(count.get(), "Accident 2", "Text for accident 2", "Address for accident 2"));
