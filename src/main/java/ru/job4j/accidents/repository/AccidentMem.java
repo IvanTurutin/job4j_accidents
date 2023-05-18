@@ -4,6 +4,7 @@ import net.jcip.annotations.GuardedBy;
 import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Repository;
 import ru.job4j.accidents.model.Accident;
+import ru.job4j.accidents.model.AccidentType;
 
 import java.util.List;
 import java.util.Map;
@@ -23,11 +24,29 @@ public class AccidentMem {
     @GuardedBy("this")
     private final AtomicInteger count = new AtomicInteger(1);
 
+    public AccidentMem(AccidentTypeMem accidentTypeMem) {
 
-    public AccidentMem() {
-        store.put(count.getAndIncrement(), new Accident(count.get(), "Accident 1", "Text for accident 1", "Address for accident 1"));
-        store.put(count.getAndIncrement(), new Accident(count.get(), "Accident 2", "Text for accident 2", "Address for accident 2"));
-        store.put(count.getAndIncrement(), new Accident(count.get(), "Accident 3", "Text for accident 3", "Address for accident 3"));
+        store.put(count.get(), new Accident(
+                count.getAndIncrement(),
+                "Accident 1",
+                "Text for accident 1",
+                "Address for accident 1",
+                accidentTypeMem.findById(1).orElse(new AccidentType())
+        ));
+        store.put(count.get(), new Accident(
+                count.getAndIncrement(),
+                "Accident 2",
+                "Text for accident 2",
+                "Address for accident 2",
+                accidentTypeMem.findById(2).orElse(new AccidentType())
+        ));
+        store.put(count.get(), new Accident(
+                count.getAndIncrement(),
+                "Accident 3",
+                "Text for accident 3",
+                "Address for accident 3",
+                accidentTypeMem.findById(3).orElse(new AccidentType())
+        ));
     }
 
     /**
