@@ -39,7 +39,6 @@
             <div class="card-header">
                 Редактирование нарушения
             </div>
-
             <div class="card-body">
                 <form th:action="@{/accidents/updateAccident}" method="POST" th:object="${accident}" enctype="multipart/form-data">
                     <input type="hidden" name="id" value="0" th:field="*{id}"/>

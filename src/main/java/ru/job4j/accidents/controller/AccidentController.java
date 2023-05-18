@@ -88,5 +88,4 @@ public class AccidentController {
         log.debug("accident at update() after update = " + accident);
         return "redirect:/index";
     }
-
 }
