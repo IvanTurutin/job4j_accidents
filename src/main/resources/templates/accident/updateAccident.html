@@ -29,38 +29,38 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav" >
                 <a class="nav-item nav-link" th:href="@{/index}">Все</a>
-                <a class="nav-item nav-link active" href="#">Добавить нарушение<span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link active" href="#">Редактирование нарушения<span class="sr-only">(current)</span></a>
                 <a class="nav-item nav-link" th:text="${user}" href="#"></a>
             </div>
         </div>
     </nav>
     <div class="row pt-3">
         <div class="card" style="width: 100%">
-            <div class="card-header" >
-                Новое нарушение
+            <div class="card-header">
+                Редактирование нарушения
             </div>
 
             <div class="card-body">
-                <form th:action="@{/accidents/saveAccident}" method="POST" enctype="multipart/form-data">
-                    <input type="hidden" name="id" value="0"/>
+                <form th:action="@{/accidents/updateAccident}" method="POST" th:object="${accident}" enctype="multipart/form-data">
+                    <input type="hidden" name="id" value="0" th:field="*{id}"/>
                     <div class="form-group">
                         <label for="name">Наименование нарушения</label>
-                        <input type="text" class="form-control" name="name" id="name">
+                        <input type="text" class="form-control" name="name" id="name" th:field="*{name}">
                         <div class="form-group">
                             <label for="type.id">Тип</label>
                             <select class="form-control" id="type.id"  name="type.id">
-                                <option th:each="type, itemStat : ${types}"
+                                <option th:each="type: ${types}"
                                         th:text="${type.name}"
                                         th:value="${type.id}"
-                                        th:selected="${itemStat.index == 0}"></option>
+                                        th:selected="${type.id == __*{type.id}__}"></option>
                             </select>
                         </div>
                         <label for="text">Описание нарушения</label>
-                        <input type="text" class="form-control" name="text" id="text">
+                        <input type="text" class="form-control" name="text" id="text" th:field="*{text}">
                         <label for="address">Адрес нарушения</label>
-                        <input type="text" class="form-control" name="address" id="address">
+                        <input type="text" class="form-control" name="address" id="address" th:field="*{address}">
                     </div>
-                    <button type="submit" class="btn btn-primary">Сохранить</button>
+                    <button type="submit" class="btn btn-primary">Отредактировать</button>
                 </form>
             </div>
         </div>
