@@ -1,9 +1,8 @@
 package ru.job4j.accidents.controller;
 
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import net.jcip.annotations.ThreadSafe;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -16,9 +15,9 @@ import java.util.Optional;
 @Controller
 @AllArgsConstructor
 @RequestMapping("/accidents")
+@Slf4j
 public class AccidentController {
     private final AccidentService accidentService;
-    private static final Logger LOG = LoggerFactory.getLogger(AccidentController.class.getName());
 
     @GetMapping("/createAccident")
     public String viewCreateAccident(Model model) {
@@ -29,7 +28,7 @@ public class AccidentController {
 
     @PostMapping("/saveAccident")
     public String save(Model model, @ModelAttribute Accident accident) {
-        LOG.debug("accident at save() before add/update = " + accident);
+        log.debug("accident at save() before add/update = " + accident);
         if (accident.getId() == 0) {
             if (!accidentService.create(accident)) {
                 model.addAttribute("message", "Не удалось добавить новое нарушение.");
@@ -41,7 +40,7 @@ public class AccidentController {
                 return "message/fail";
             }
         }
-        LOG.debug("accident at save() after add/update = " + accident);
+        log.debug("accident at save() after add/update = " + accident);
         return "redirect:/index";
     }
 
