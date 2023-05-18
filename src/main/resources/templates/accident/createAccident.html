@@ -59,7 +59,14 @@
                         <label for="address">Адрес нарушения</label>
                         <input type="text" class="form-control" name="address" id="address" th:field="*{address}">
                     </div>
-                    <button type="submit" class="btn btn-primary mt-3">Сохранить</button>
+                    <button type="submit" class="btn btn-primary" name="action" value="save"
+                            th:if="${accident.id == 0}">
+                        Сохранить
+                    </button>
+                    <button type="submit" class="btn btn-primary" name="action" value="update"
+                            th:if="${accident.id != 0}">
+                        Отредактировать
+                    </button>
                 </form>
             </div>
         </div>
