@@ -4,7 +4,6 @@ import net.jcip.annotations.GuardedBy;
 import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Repository;
 import ru.job4j.accidents.model.Accident;
-import ru.job4j.accidents.model.AccidentType;
 
 import java.util.List;
 import java.util.Map;
@@ -23,31 +22,6 @@ public class AccidentMem {
     private final Map<Integer, Accident> store = new ConcurrentHashMap<>();
     @GuardedBy("this")
     private final AtomicInteger count = new AtomicInteger(1);
-
-    public AccidentMem(AccidentTypeMem accidentTypeMem) {
-
-        store.put(count.get(), new Accident(
-                count.getAndIncrement(),
-                "Accident 1",
-                "Text for accident 1",
-                "Address for accident 1",
-                accidentTypeMem.findById(1).orElse(new AccidentType())
-        ));
-        store.put(count.get(), new Accident(
-                count.getAndIncrement(),
-                "Accident 2",
-                "Text for accident 2",
-                "Address for accident 2",
-                accidentTypeMem.findById(2).orElse(new AccidentType())
-        ));
-        store.put(count.get(), new Accident(
-                count.getAndIncrement(),
-                "Accident 3",
-                "Text for accident 3",
-                "Address for accident 3",
-                accidentTypeMem.findById(3).orElse(new AccidentType())
-        ));
-    }
 
     /**
      * Ищет все нарушения
@@ -77,8 +51,7 @@ public class AccidentMem {
      * @return объект нарушения обернутый в Optional, или Optional.empty если нарушение не найдено
      */
     public Optional<Accident> findById(int id) {
-        Accident accident = store.get(id);
-        return accident == null ? Optional.empty() : Optional.of(accident);
+        return Optional.ofNullable(store.get(id));
     }
 
     /**
@@ -87,11 +60,7 @@ public class AccidentMem {
      * @return true если успешно обновилось, false если не обновилось
      */
     public boolean update(Accident accident) {
-        Optional<Accident> accidentOptional = findById(accident.getId());
-        if (accidentOptional.isEmpty()) {
-            return false;
-        }
-        return store.put(accident.getId(), accident) != null;
+        return store.computeIfPresent(accident.getId(), (k, v) -> accident) != null;
     }
 
 }

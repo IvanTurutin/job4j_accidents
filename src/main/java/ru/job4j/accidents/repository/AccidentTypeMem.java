@@ -57,8 +57,7 @@ public class AccidentTypeMem {
      * @return объект типа обернутый в Optional, или Optional.empty если тип не найден
      */
     public Optional<AccidentType> findById(int id) {
-        AccidentType accident = store.get(id);
-        return accident == null ? Optional.empty() : Optional.of(accident);
+        return Optional.ofNullable(store.get(id));
     }
 
     /**
@@ -67,11 +66,7 @@ public class AccidentTypeMem {
      * @return true если успешно обновилось, false если не обновилось
      */
     public boolean update(AccidentType type) {
-        Optional<AccidentType> typeOptional = findById(type.getId());
-        if (typeOptional.isEmpty()) {
-            return false;
-        }
-        return store.put(type.getId(), type) != null;
+        return store.computeIfPresent(type.getId(), (k, v) -> type) != null;
     }
 
 }
