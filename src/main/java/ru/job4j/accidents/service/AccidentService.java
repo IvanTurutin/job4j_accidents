@@ -6,7 +6,8 @@ import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Service;
 import ru.job4j.accidents.model.Accident;
 import ru.job4j.accidents.model.AccidentType;
-import ru.job4j.accidents.repository.AccidentMem;
+import ru.job4j.accidents.repository.AccidentRepository;
+import ru.job4j.accidents.repository.AccidentTypeRepository;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -22,8 +23,8 @@ import java.util.Optional;
 @AllArgsConstructor
 @Slf4j
 public class AccidentService {
-    private final AccidentMem repository;
-    private final AccidentTypeService accidentTypeService;
+    private final AccidentRepository repository;
+    private final AccidentTypeRepository accidentTypeRepository;
 
     /**
      * Ищет все нарушения
@@ -42,8 +43,13 @@ public class AccidentService {
         return repository.add(checkAccidentType(accident)).isPresent();
     }
 
+    /**
+     * Осуществляет проверку наличия соответствующего типа нарушения и его внедрение в объект нарушения
+     * @param accident объект нарушения
+     * @return объект нарушения с внедренным типом нарушения
+     */
     private Accident checkAccidentType(Accident accident) {
-        Optional<AccidentType> accidentType = accidentTypeService.findById(accident.getType().getId());
+        Optional<AccidentType> accidentType = accidentTypeRepository.findById(accident.getType().getId());
         if (accidentType.isEmpty()) {
             throw new NoSuchElementException("Такой тип нарушения не найден");
         }
