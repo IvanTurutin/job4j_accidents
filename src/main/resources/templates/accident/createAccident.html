@@ -59,6 +59,14 @@
                         <input type="text" class="form-control" name="text" id="text">
                         <label for="address">Адрес нарушения</label>
                         <input type="text" class="form-control" name="address" id="address">
+                        <div class="form-group">
+                            <label for="rIds" name="rIds">Статья</label>
+                            <select class="form-control" id="rIds" name="rIds" multiple>
+                                <option th:each="rule: ${allRules}"
+                                        th:text="${rule.name}"
+                                        th:value="${rule.id}"></option>
+                            </select>
+                        </div>
                     </div>
                     <button type="submit" class="btn btn-primary">Сохранить</button>
                 </form>

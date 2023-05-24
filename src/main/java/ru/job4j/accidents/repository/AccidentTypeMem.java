@@ -17,22 +17,23 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 @ThreadSafe
 @Repository
-public class AccidentTypeMem {
+public class AccidentTypeMem implements AccidentTypeRepository {
     @GuardedBy("this")
     private final Map<Integer, AccidentType> store = new ConcurrentHashMap<>();
     @GuardedBy("this")
     private final AtomicInteger count = new AtomicInteger(1);
 
     public AccidentTypeMem() {
-        store.put(count.getAndIncrement(), new AccidentType(count.get(), "Две машины"));
-        store.put(count.getAndIncrement(), new AccidentType(count.get(), "Машина и человек"));
-        store.put(count.getAndIncrement(), new AccidentType(count.get(), "Машина и велосипед"));
+        store.put(count.get(), new AccidentType(count.getAndIncrement(), "Две машины"));
+        store.put(count.get(), new AccidentType(count.getAndIncrement(), "Машина и человек"));
+        store.put(count.get(), new AccidentType(count.getAndIncrement(), "Машина и велосипед"));
     }
 
     /**
      * Ищет все типы
      * @return список типов
      */
+    @Override
     public List<AccidentType> findAll() {
         return store.values().stream().toList();
     }
@@ -42,6 +43,7 @@ public class AccidentTypeMem {
      * @param type объект типа
      * @return объект типа в Optional если успешно сохранено, Optional.empty если не сохранено.
      */
+    @Override
     public Optional<AccidentType> add(AccidentType type) {
         if (store.get(type.getId()) != null) {
             return Optional.empty();
@@ -56,6 +58,7 @@ public class AccidentTypeMem {
      * @param id идентификатор
      * @return объект типа обернутый в Optional, или Optional.empty если тип не найден
      */
+    @Override
     public Optional<AccidentType> findById(int id) {
         return Optional.ofNullable(store.get(id));
     }
@@ -65,6 +68,7 @@ public class AccidentTypeMem {
      * @param type объект типа
      * @return true если успешно обновилось, false если не обновилось
      */
+    @Override
     public boolean update(AccidentType type) {
         return store.computeIfPresent(type.getId(), (k, v) -> type) != null;
     }

@@ -27,6 +27,7 @@ public class AccidentMem implements AccidentRepository {
      * Ищет все нарушения
      * @return список нарушений
      */
+    @Override
     public List<Accident> findAll() {
         return store.values().stream().toList();
     }
@@ -36,6 +37,7 @@ public class AccidentMem implements AccidentRepository {
      * @param accident объект нарушения
      * @return объект нарушения в Optional если успешно сохранено, Optional.empty если не сохранено.
      */
+    @Override
     public Optional<Accident> add(Accident accident) {
         if (store.get(accident.getId()) != null) {
             return Optional.empty();
@@ -50,6 +52,7 @@ public class AccidentMem implements AccidentRepository {
      * @param id идентификатор
      * @return объект нарушения обернутый в Optional, или Optional.empty если нарушение не найдено
      */
+    @Override
     public Optional<Accident> findById(int id) {
         return Optional.ofNullable(store.get(id));
     }
@@ -59,8 +62,8 @@ public class AccidentMem implements AccidentRepository {
      * @param accident объект нарушения
      * @return true если успешно обновилось, false если не обновилось
      */
+    @Override
     public boolean update(Accident accident) {
         return store.computeIfPresent(accident.getId(), (k, v) -> accident) != null;
     }
-
 }

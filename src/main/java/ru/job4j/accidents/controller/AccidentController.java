@@ -9,7 +9,10 @@ import org.springframework.web.bind.annotation.*;
 import ru.job4j.accidents.model.Accident;
 import ru.job4j.accidents.service.AccidentService;
 import ru.job4j.accidents.service.AccidentTypeService;
+import ru.job4j.accidents.service.RuleService;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.Arrays;
 import java.util.Optional;
 
 /**
@@ -23,6 +26,7 @@ import java.util.Optional;
 public class AccidentController {
     private final AccidentService accidentService;
     private final AccidentTypeService accidentTypeService;
+    private final RuleService ruleService;
 
     /**
      * Подготавливает вид создания нового нарушения
@@ -33,6 +37,7 @@ public class AccidentController {
     public String viewCreateAccident(Model model) {
         model.addAttribute("user", "Ivan");
         model.addAttribute("types", accidentTypeService.findAll());
+        model.addAttribute("allRules", ruleService.findAll());
         return "accident/createAccident";
     }
 
@@ -43,9 +48,11 @@ public class AccidentController {
      * @return адрес шаблона начальной страницы
      */
     @PostMapping("/saveAccident")
-    public String save(Model model, @ModelAttribute Accident accident) {
+    public String save(Model model, @ModelAttribute Accident accident, HttpServletRequest req) {
         log.debug("accident at save() before add = " + accident);
-        if (!accidentService.create(accident)) {
+        String[] ids = req.getParameterValues("rIds");
+        log.debug("ids at save() before add = " + Arrays.toString(ids));
+        if (!accidentService.create(accident, ids)) {
             model.addAttribute("message", "Не удалось добавить новое нарушение.");
             return "message/fail";
         }
@@ -68,6 +75,7 @@ public class AccidentController {
         }
         model.addAttribute("user", "Ivan");
         model.addAttribute("types", accidentTypeService.findAll());
+        model.addAttribute("allRules", ruleService.findAll());
         model.addAttribute("accident", accident.get());
         return "accident/updateAccident";
     }
@@ -79,9 +87,11 @@ public class AccidentController {
      * @return адрес шаблона начальной страницы
      */
     @PostMapping("/updateAccident")
-    public String update(Model model, @ModelAttribute Accident accident) {
+    public String update(Model model, @ModelAttribute Accident accident, HttpServletRequest req) {
         log.debug("accident at update() before update = " + accident);
-        if (!accidentService.update(accident)) {
+        String[] ids = req.getParameterValues("rIds");
+        log.debug("ids at update() before update = " + Arrays.toString(ids));
+        if (!accidentService.update(accident, ids)) {
             model.addAttribute("message", "Не удалось обновить нарушение.");
             return "message/fail";
         }

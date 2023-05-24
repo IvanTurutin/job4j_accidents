@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Service;
 import ru.job4j.accidents.model.AccidentType;
-import ru.job4j.accidents.repository.AccidentTypeMem;
+import ru.job4j.accidents.repository.AccidentTypeRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,7 +13,7 @@ import java.util.Optional;
 @Service
 @AllArgsConstructor
 public class AccidentTypeService {
-    private final AccidentTypeMem repository;
+    private final AccidentTypeRepository repository;
 
     /**
      * Ищет все типы
