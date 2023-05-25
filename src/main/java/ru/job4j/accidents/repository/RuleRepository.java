@@ -4,6 +4,7 @@ import ru.job4j.accidents.model.Rule;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * Репозиторий статей нарушений
@@ -36,5 +37,12 @@ public interface RuleRepository {
      * @return true если успешно обновилось, false если не обновилось
      */
     boolean update(Rule rule);
+
+    /**
+     * Ищет статьи по списку идентификаторов
+     * @param ids идентификаторы
+     * @return множество статей
+     */
+    Set<Rule> findRules(List<Integer> ids);
 
 }

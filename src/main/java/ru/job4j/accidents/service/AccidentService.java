@@ -6,12 +6,14 @@ import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Service;
 import ru.job4j.accidents.model.Accident;
 import ru.job4j.accidents.model.AccidentType;
-import ru.job4j.accidents.model.Rule;
 import ru.job4j.accidents.repository.AccidentRepository;
 import ru.job4j.accidents.repository.AccidentTypeRepository;
 import ru.job4j.accidents.repository.RuleRepository;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -52,8 +54,7 @@ public class AccidentService {
      * @return true если успешно добавлен, false если не добавлен.
      */
     public boolean create(Accident accident, String[] ids) {
-        accident.setRules(checkRules(ids));
-        return create(accident);
+        return create(setRulesToAccident(accident, ids));
     }
 
     /**
@@ -68,23 +69,6 @@ public class AccidentService {
         }
         accident.setType(accidentType.get());
         return accident;
-    }
-
-    private Set<Rule> checkRules(String[] ids) {
-        return Arrays.stream(ids)
-                .map(i -> new Rule(Integer.parseInt(i), null))
-                .collect(Collectors.toSet())
-                .stream()
-                .map(this::checkRule)
-                .collect(Collectors.toSet());
-    }
-
-    private Rule checkRule(Rule rule) {
-        Optional<Rule> ruleOptional = ruleRepository.findById(rule.getId());
-        if (ruleOptional.isEmpty()) {
-            throw new NoSuchElementException("Такая статья нарушения не найдена");
-        }
-        return ruleOptional.get();
     }
 
     /**
@@ -112,7 +96,22 @@ public class AccidentService {
      * @return true если успешно добавлен, false если не добавлен.
      */
     public boolean update(Accident accident, String[] ids) {
-        accident.setRules(checkRules(ids));
-        return update(accident);
+        return update(setRulesToAccident(accident, ids));
+    }
+
+    /**
+     * Проверяет наличие всех выбранных статей нарушений и присваивает их объекту нарушения
+     * @param accident нарушение
+     * @param ids массив идентификаторов статей нарушений
+     * @return собранный объект нарушения
+     */
+    private Accident setRulesToAccident(Accident accident, String[] ids) {
+        accident.setRules(
+                ruleRepository.findRules(
+                        Arrays.stream(ids)
+                                .map(Integer::parseInt)
+                                .collect(Collectors.toList())
+                ));
+        return accident;
     }
 }

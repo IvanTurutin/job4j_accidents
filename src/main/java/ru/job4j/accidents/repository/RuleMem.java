@@ -5,11 +5,10 @@ import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Repository;
 import ru.job4j.accidents.model.Rule;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 /**
  * Репозиторий статей нарушений
@@ -73,4 +72,16 @@ public class RuleMem implements RuleRepository {
         return store.computeIfPresent(rule.getId(), (k, v) -> rule) != null;
     }
 
+    /**
+     * Ищет статьи по списку идентификаторов
+     * @param ids идентификаторы
+     * @return множество статей
+     */
+    @Override
+    public Set<Rule> findRules(List<Integer> ids) {
+        return ids.stream()
+                .map(this::findById)
+                .map(ro -> ro.orElseThrow(() -> new NoSuchElementException("Такая статья нарушения не найдена")))
+                .collect(Collectors.toSet());
+    }
 }
