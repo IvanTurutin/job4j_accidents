@@ -2,7 +2,6 @@ package ru.job4j.accidents.repository;
 
 import net.jcip.annotations.GuardedBy;
 import net.jcip.annotations.ThreadSafe;
-import org.springframework.stereotype.Repository;
 import ru.job4j.accidents.model.Rule;
 
 import java.util.*;
@@ -15,7 +14,7 @@ import java.util.stream.Collectors;
  * @see ru.job4j.accidents.model.Rule
  */
 @ThreadSafe
-@Repository
+/*@Repository*/
 public class RuleMem implements RuleRepository {
     @GuardedBy("this")
     private final Map<Integer, Rule> store = new ConcurrentHashMap<>();

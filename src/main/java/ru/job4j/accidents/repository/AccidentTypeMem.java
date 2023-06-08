@@ -2,7 +2,6 @@ package ru.job4j.accidents.repository;
 
 import net.jcip.annotations.GuardedBy;
 import net.jcip.annotations.ThreadSafe;
-import org.springframework.stereotype.Repository;
 import ru.job4j.accidents.model.AccidentType;
 
 import java.util.List;
@@ -16,7 +15,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @see ru.job4j.accidents.model.AccidentType
  */
 @ThreadSafe
-@Repository
+/*@Repository*/
 public class AccidentTypeMem implements AccidentTypeRepository {
     @GuardedBy("this")
     private final Map<Integer, AccidentType> store = new ConcurrentHashMap<>();

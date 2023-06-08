@@ -106,12 +106,15 @@ public class AccidentService {
      * @return собранный объект нарушения
      */
     private Accident setRulesToAccident(Accident accident, String[] ids) {
-        accident.setRules(
-                ruleRepository.findRules(
-                        Arrays.stream(ids)
-                                .map(Integer::parseInt)
-                                .collect(Collectors.toList())
-                ));
+        if (ids != null) {
+            accident.setRules(
+                    ruleRepository.findRules(
+                            Arrays.stream(ids)
+                                    .map(Integer::parseInt)
+                                    .collect(Collectors.toList())
+                    ));
+        }
+        log.debug("accident at setRulesToAccident() after add rules = " + accident);
         return accident;
     }
 }
