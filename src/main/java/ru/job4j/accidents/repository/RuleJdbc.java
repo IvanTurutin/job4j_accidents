@@ -5,14 +5,15 @@ import net.jcip.annotations.GuardedBy;
 import net.jcip.annotations.ThreadSafe;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.stereotype.Repository;
 import ru.job4j.accidents.model.Rule;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
 @ThreadSafe
+/*
 @Repository
+*/
 @AllArgsConstructor
 public class RuleJdbc implements RuleRepository {
     @GuardedBy("this")

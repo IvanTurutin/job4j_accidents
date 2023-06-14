@@ -5,7 +5,6 @@ import net.jcip.annotations.GuardedBy;
 import net.jcip.annotations.ThreadSafe;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.stereotype.Repository;
 import ru.job4j.accidents.model.AccidentType;
 
 import java.util.List;
@@ -13,7 +12,9 @@ import java.util.Map;
 import java.util.Optional;
 
 @ThreadSafe
+/*
 @Repository
+*/
 @AllArgsConstructor
 public class AccidentTypeJdbc implements AccidentTypeRepository {
     @GuardedBy("this")

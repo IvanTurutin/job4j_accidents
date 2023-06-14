@@ -5,7 +5,6 @@ import lombok.extern.slf4j.Slf4j;
 import net.jcip.annotations.GuardedBy;
 import net.jcip.annotations.ThreadSafe;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Repository;
 import ru.job4j.accidents.model.Accident;
 import ru.job4j.accidents.model.Rule;
 
@@ -16,7 +15,9 @@ import java.util.Objects;
 import java.util.Optional;
 
 @ThreadSafe
+/*
 @Repository
+*/
 @AllArgsConstructor
 @Slf4j
 public class AccidentJdbc implements AccidentRepository {
