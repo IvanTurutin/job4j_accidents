@@ -33,9 +33,7 @@ public class AccidentServiceSpringData implements AccidentService {
      */
     @Override
     public List<Accident> findAll() {
-        List<Accident> accidents = new ArrayList<>();
-        repository.findAll().forEach(accidents::add);
-        return accidents;
+        return repository.findAll();
     }
 
     /**
