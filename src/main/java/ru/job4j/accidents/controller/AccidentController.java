@@ -3,6 +3,7 @@ package ru.job4j.accidents.controller;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.jcip.annotations.ThreadSafe;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -73,7 +74,7 @@ public class AccidentController {
             model.addAttribute("message", "Не удалось найти нарушение.");
             return "message/fail";
         }
-        model.addAttribute("user", "Ivan");
+        model.addAttribute("user", SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         model.addAttribute("types", accidentTypeService.findAll());
         model.addAttribute("allRules", ruleService.findAll());
         model.addAttribute("accident", accident.get());
