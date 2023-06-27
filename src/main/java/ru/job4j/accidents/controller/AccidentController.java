@@ -36,7 +36,7 @@ public class AccidentController {
      */
     @GetMapping("/createAccident")
     public String viewCreateAccident(Model model) {
-        model.addAttribute("user", "Ivan");
+        model.addAttribute("user", SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         model.addAttribute("types", accidentTypeService.findAll());
         model.addAttribute("allRules", ruleService.findAll());
         return "accident/createAccident";
