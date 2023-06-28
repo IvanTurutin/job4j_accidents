@@ -1,6 +1,7 @@
 package ru.job4j.accidents.service;
 
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Service;
 import ru.job4j.accidents.model.User;
@@ -17,6 +18,7 @@ import java.util.Optional;
 @ThreadSafe
 @Service
 @AllArgsConstructor
+@Slf4j
 public class UserService {
     private final UserRepositorySpringData repository;
     private final AuthorityRepositorySpringData authorityRepository;
@@ -35,7 +37,12 @@ public class UserService {
      * @return true если успешно добавлен, false если не добавлен.
      */
     public boolean create(User user) {
-        return repository.save(checkForAuthority(user)).getId() != 0;
+        try {
+            return repository.save(checkForAuthority(user)).getId() != 0;
+        } catch (Exception e) {
+            log.error("Exception at UserService.create()", e);
+            return false;
+        }
     }
 
     private User checkForAuthority(User user) {
@@ -62,8 +69,13 @@ public class UserService {
      * @return true если успешно обновилось, false если не обновилось
      */
     public boolean update(User user) {
-        repository.save(checkForAuthority(user));
-        return true;
+        try {
+            repository.save(checkForAuthority(user));
+            return true;
+        } catch (Exception e) {
+            log.error("Exception at UserService.create()", e);
+            return false;
+        }
     }
 
 }
