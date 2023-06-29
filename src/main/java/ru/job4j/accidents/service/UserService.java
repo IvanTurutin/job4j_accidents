@@ -41,8 +41,8 @@ public class UserService {
             return repository.save(checkForAuthority(user)).getId() != 0;
         } catch (Exception e) {
             log.error("Exception at UserService.create()", e);
-            return false;
         }
+        return false;
     }
 
     private User checkForAuthority(User user) {
@@ -74,8 +74,8 @@ public class UserService {
             return true;
         } catch (Exception e) {
             log.error("Exception at UserService.create()", e);
-            return false;
         }
+        return false;
     }
 
 }
