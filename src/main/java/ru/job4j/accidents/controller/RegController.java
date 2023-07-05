@@ -15,14 +15,13 @@ import ru.job4j.accidents.service.UserService;
 @Controller
 @AllArgsConstructor
 @ThreadSafe
-
 public class RegController {
 
     private final PasswordEncoder encoder;
     private final UserService users;
     private final AuthorityService authorities;
 
-    @PostMapping("/reg")
+    @PostMapping("/registration")
     public String regSave(@ModelAttribute User user, Model model) {
         user.setEnabled(true);
         user.setPassword(encoder.encode(user.getPassword()));

@@ -29,6 +29,8 @@ public class IndexController {
     public String index(Model model, HttpSession session) {
         model.addAttribute("user", SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         model.addAttribute("accidents", accidentService.findAll());
+        System.out.println("index(Model model, HttpSession session)");
+        accidentService.findAll().forEach(System.out::println);
         return "index";
     }
 

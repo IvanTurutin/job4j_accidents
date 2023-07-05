@@ -121,12 +121,6 @@
     </dependency>
 
     <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-test</artifactId>
-      <scope>test</scope>
-    </dependency>
-
-    <dependency>
       <groupId>net.jcip</groupId>
       <artifactId>jcip-annotations</artifactId>
       <version>1.0</version>
@@ -160,6 +154,18 @@
       <groupId>org.springframework.security</groupId>
       <artifactId>spring-security-web</artifactId>
     </dependency>
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-test</artifactId>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
 
   <build>
@@ -182,7 +188,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-checkstyle-plugin</artifactId>
-        <version>3.2.0</version>
+        <version>3.1.2</version>
         <dependencies>
           <dependency>
             <groupId>com.puppycrawl.tools</groupId>
@@ -196,7 +202,7 @@
             <phase>validate</phase>
             <configuration>
               <configLocation>checkstyle.xml</configLocation>
-              <!-- <encoding>UTF-8</encoding> -->
+              <encoding>UTF-8</encoding>
               <consoleOutput>true</consoleOutput>
               <failsOnError>true</failsOnError>
               <includeTestSourceDirectory>true</includeTestSourceDirectory>
